@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
+@theme {
+  /* core dark-elegant palette (single shade per token) */
+  --color-midnight-500: #0b1226; /* primary deep background */
+  --color-ink-500: #071029; /* deepest background */
+  --color-slategraph-500: #172033; /* surface */
+  --color-platinum-500: #4fd1c5; /* soft teal accent */
+  --color-cerulean-500: #5ab2ff; /* bright CTA accent */
+
+  /* optional helpers */
+  --color-card-500: color-mix(in srgb, var(--color-midnight-500) 78%, white 6%);
+  --muted-500: rgba(255, 255, 255, 0.65);
+}
+
+/* Fallback CSS variables (useful in JS/canvas) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-midnight: #0b1226;
+  --color-ink: #071029;
+  --color-slategraph: #172033;
+  --color-platinum: #4fd1c5;
+  --color-cerulean: #5ab2ff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Body defaults for dark elegant look */
+html,
+body,
+#__next {
+  height: 100%;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-ink);
+  color: rgba(255, 255, 255, 0.92);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* small helper classes */
+.text-muted {
+  color: var(--muted-500);
+}
+.bg-card {
+  background: var(--color-card-500);
+}
+
+/* Custom thin glassy scrollbar (WebKit + Firefox) */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 178, 255, 0.36) rgba(255, 255, 255, 0.02);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(90, 178, 255, 0.34),
+    rgba(79, 209, 197, 0.28)
+  );
+  border-radius: 9999px;
+  border: 2px solid rgba(11, 18, 38, 0.45);
+  min-height: 28px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(90, 178, 255, 0.48),
+    rgba(79, 209, 197, 0.4)
+  );
 }
